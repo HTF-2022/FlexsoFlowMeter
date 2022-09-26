@@ -10,6 +10,7 @@ import json
 def end_run(signal, frame):
     global keep_running
     GPIO.cleanup()
+    client.loop_stop()
     print("run stopped")
     print("BYE")
     keep_running = False
@@ -59,8 +60,7 @@ client.on_publish = on_publish
 
 # loop_forever for simplicity, here you need to stop the loop manually
 # you can also use loop_start and loop_stop
-#client.loop_forever()
-
+client.loop_start()
 # ctrl + c => Stop
 signal.signal(signal.SIGINT, end_run)
 
@@ -94,7 +94,7 @@ while keep_running:
         msg_json = json.dumps(message)
         print(msg_json)
         # publish flow here
-        client.publish("/flowMeter", payload=msg_json, qos=1, retain=True)
+        client.publish("/flowMeter", payload=msg_json, qos=1)
         count = 0
         time.sleep(1)
     except KeyboardInterrupt:
