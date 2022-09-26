@@ -48,7 +48,7 @@ client.on_connect = on_connect
 # enable TLS for secure connection
 client.tls_set(tls_version=mqtt.client.ssl.PROTOCOL_TLS)
 # set username and password
-client.username_pw_set("flexso", "hackflexso")
+client.username_pw_set("flexso", "flexsohtf")
 # connect to HiveMQ Cloud on port 8883 (default for MQTT)
 client.connect(hostname, port)
 
@@ -56,12 +56,6 @@ client.connect(hostname, port)
 client.on_subscribe = on_subscribe
 client.on_message = on_message
 client.on_publish = on_publish
-
-# subscribe to all topics of encyclopedia by using the wildcard "#"
-#client.subscribe("encyclopedia/#", qos=1)
-
-# a single publish, this can also be done in loops, etc.
-#client.publish("/te", payload="hot", qos=1)
 
 # loop_forever for simplicity, here you need to stop the loop manually
 # you can also use loop_start and loop_stop
